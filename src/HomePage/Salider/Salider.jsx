@@ -5,7 +5,7 @@ import "keen-slider/keen-slider.min.css"
 
 
 
-export  const Salider = () => {
+export const Salider = () => {
     const [sliderRef] = useKeenSlider(
         {
             loop: true,
@@ -42,14 +42,24 @@ export  const Salider = () => {
         ]
     )
     return (
-        <div>
-            <div ref={sliderRef} className="keen-slider">
-                <div className="keen-slider__slide number-slide1">hello</div>
-                <div className="keen-slider__slide number-slide2">2</div>
-                <div className="keen-slider__slide number-slide3">3</div>
+        <div className="w-[90%] mx-auto">
+            <div ref={sliderRef} className="keen-slider  ">
+                <div className="keen-slider__slide number-slide1">
+                    <img src="https://icms-image.slatic.net/images/ims-web/22de5803-c6ef-42d5-83b0-3a6ab4264773.jpg" alt="" />
+
+                </div>
+                <div className="keen-slider__slide number-slide2">
+                    <img src="https://icms-image.slatic.net/images/ims-web/22de5803-c6ef-42d5-83b0-3a6ab4264773.jpg" alt="" />
+
+                </div>
+                <div className="keen-slider__slide number-slide3">
+                    <img src="https://icms-image.slatic.net/images/ims-web/36015093-f6e3-43fc-af96-9dec3bdc2d17.jpg" alt="" />
+                </div>
                 <div className="keen-slider__slide number-slide4">4</div>
-                <div className="keen-slider__slide number-slide5">5</div>
-                <div className="keen-slider__slide number-slide6">6</div>
+                <div className="keen-slider__slide number-slide5"><img src="https://icms-image.slatic.net/images/ims-web/36015093-f6e3-43fc-af96-9dec3bdc2d17.jpg" alt="" /></div>
+                <div className="keen-slider__slide number-slide6">
+                    <img src="https://icms-image.slatic.net/images/ims-web/36015093-f6e3-43fc-af96-9dec3bdc2d17.jpg" alt="" />
+                </div>
             </div>
         </div>
     );
