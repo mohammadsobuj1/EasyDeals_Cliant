@@ -7,7 +7,7 @@ const Navitems = <>
 
     <Link > HOme</Link>
    {
-    user ?  <Link>DashBord</Link>:""
+    user ?  <Link to="/dashbord">DashBord</Link>:""
    }
     <Link>Blogs</Link>
     <Link>Easy Donates</Link>

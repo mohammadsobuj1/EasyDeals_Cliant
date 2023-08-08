@@ -6,9 +6,9 @@ import { Salider } from "../Salider/Salider";
 const Home = () => {
     return (
         <div>
-          <Salider/>
+            <Salider />
             <Categoreys />
-            
+
         </div>
     );
 };
