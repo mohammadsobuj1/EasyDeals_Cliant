@@ -7,6 +7,8 @@ import MyAccount from "../../Pages/DashbordPages/MyAccount/MyAccount";
 import DashHome from "../../Pages/DashbordPages/Home/Home";
 import AddProducts from "../../Pages/DashbordPages/Instractor/AddProducts/AddProducts";
 import LogIn from "../../Pages/LogIn/LogIn";
+import Regiestration from "../../Pages/Regiestration/Regiestration";
+import PrivetRoute from "../../Components/PrivateRoute/PrivetRoute";
 
 
 
@@ -34,7 +36,7 @@ const router = createBrowserRouter([
 
     {
         path: "dashbord",
-        element: <Dashbord />,
+        element: <PrivetRoute><Dashbord /></PrivetRoute>,
         children: [
             {
                 path: "/dashbord",
@@ -46,14 +48,18 @@ const router = createBrowserRouter([
             },
             {
                 path: "/dashbord/addproduct",
-                element: <AddProducts />
+                element: <PrivetRoute><AddProducts /></PrivetRoute>
             },
         ]
     },
     {
         path: "/login",
         element: <LogIn />
-    }
+    },
+    {
+        path: "/registration",
+        element: <Regiestration />
+    },
 
 ]);
 

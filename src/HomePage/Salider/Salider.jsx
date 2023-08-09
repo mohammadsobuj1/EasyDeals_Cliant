@@ -110,7 +110,7 @@ const Salider = () => {
     };
 
     return (
-        <div className='max-w-[1400px] h-[650px] w-full m-auto py-8 px-4 relative group'>
+        <div className='max-w-[1300px] h-[300px] md:h-[500px] lg:h-[600px] w-full m-auto  px-4 relative group'>
             <div
                 style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
                 className='w-full h-full rounded-2xl bg-center bg-cover duration-500'
