@@ -1,5 +1,6 @@
 import Categoreys from "../Categoreys/Categoreys";
-import { Salider } from "../Salider/Salider";
+import Salider from "../Salider/Salider";
+
 
 
 

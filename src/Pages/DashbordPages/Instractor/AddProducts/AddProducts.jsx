@@ -30,11 +30,15 @@ const AddProducts = () => {
 
                     </div>
                     <div className="">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black" >Selact Categorey</label>
+                        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black" >Selact Categorey</label>
                         <select {...register("catagorey")} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="female">female</option>
-                            <option value="male">male</option>
-                            <option value="other">other</option>
+                            <option value="Selact_one">Selact One</option>
+                            <option value="groceries">Groceries</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="beauty_glamour">Beauty & Glamour</option>
+                            <option value="home_lifestyle ">Home & Lifestyle </option>
+                            <option value="sports_utdoors">Sports & Outdoors</option>
+                            <option value="electronic_accessories">Electronic Accessories</option>
                         </select>
                     </div>
 
@@ -60,7 +64,11 @@ const AddProducts = () => {
                         <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Discount</label>
                     </div>
                 </div>
-                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                <div className="relative z-0 w-full mb-6 group">
+                    <input type="" className="block py-2.5 textarea px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " {...register("description", { required: true, maxLength: 20 })} />
+                    <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Description</label>
+                </div>
+                <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Product</button>
             </form>
 
 

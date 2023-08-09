@@ -6,6 +6,7 @@ import Dashbord from "../../Components/LayOut/Dashbord";
 import MyAccount from "../../Pages/DashbordPages/MyAccount/MyAccount";
 import DashHome from "../../Pages/DashbordPages/Home/Home";
 import AddProducts from "../../Pages/DashbordPages/Instractor/AddProducts/AddProducts";
+import LogIn from "../../Pages/LogIn/LogIn";
 
 
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
                 element: <AddProducts />
             },
         ]
+    },
+    {
+        path: "/login",
+        element: <LogIn />
     }
 
 ]);
