@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Components/AuthProvider/AuthProvider";
 
 const Regiestration = () => {
-    const { createUser, googlelogIn, githublogin } = useContext(AuthContext)
+    const { createUser, googlelogIn, githublogin, changeName } = useContext(AuthContext)
     const navigate = useNavigate()
     const [error, setError] = useState('')
 
@@ -15,9 +15,44 @@ const Regiestration = () => {
 
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const onSubmit = data => {
-        const { name, email, password, confirm_password, role } = data;
+        const { name, email, password, confirm_password, role, photo } = data;
+
+        if (password !== confirm_password) {
+            setError("password not match")
+            return
+        }
+
+
         createUser(email, password)
             .then(result => {
+                changeName(result?.user, name, photo)
+                    .then(() => {
+                        const userData = { name, email, photo, role }
+                        fetch(`http://localhost:3000/users`, {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(userData)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset()
+                                    navigate('/')
+
+                                }
+
+                            })
+
+
+
+
+                    })
+                    .catch(error => {
+                        setError(error.message)
+                    })
+
                 console.log(result)
                 reset()
                 // navigate('/login')
@@ -34,6 +69,25 @@ const Regiestration = () => {
     const googleHandaler = () => {
         googlelogIn()
             .then(result => {
+                const userData = { name: result.user.displayName, email: result.user.email, photo: result.user.photoURL }
+                fetch(`http://localhost:3000/users`, {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            reset()
+                            navigate('/')
+
+                        }
+
+                    })
+
+
                 console.log(result.user)
             })
     }
@@ -62,7 +116,7 @@ const Regiestration = () => {
 
                     <div className="w-full px-8 md:px-16">
                         <h2 className="font-bold text-2xl text-center text-blue-600">Create Account</h2>
-                        <p className="text-xs mt-4 mb-4 text-blue-600">If you are already a member, easily log in</p>
+                        <p className="text-xs mt-4 mb-4 text-blue-600">If you are already a member, easily log in pass : alisobuj234@A</p>
                         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
 
 
@@ -78,7 +132,7 @@ const Regiestration = () => {
                             </div>
                             <div className="grid md:grid-cols-2 md:gap-6">
                                 <div className="relative z-0 w-full mb-6 group">
-                                    <input type="password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " {...register("password", {required:true} )} />
+                                    <input type="password" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " {...register("password", { required: true })} />
                                     <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password :  </label>
                                 </div>
                                 <div className="relative z-0 w-full mb-6 group">
@@ -86,8 +140,11 @@ const Regiestration = () => {
                                     <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm Password</label>
                                 </div>
                             </div>
-
-
+                            <div className="relative z-0 w-full mb-6 group">
+                                <input className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " {...register("photo", { required: true, })} />
+                                <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Photo</label>
+                            </div>
+                            <p>{error}</p>
                             <div className="flex items-center justify-around ">
                                 <div className="text-xl font-medium font-sans"> Role :</div>
 
@@ -95,6 +152,7 @@ const Regiestration = () => {
                                     <input id="list-radio-license" type="radio" value="user" name="list-radio" className="w-4  text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-blue-700 focus:ring-2 dark:bg-gray-600 dark:border-blue-500" {...register("role", { required: true, maxLength: 20 })} />
                                     <label className="w-full py-3 ml-2 text-sm font-medium text-blue-900 dark:text-blue-600">User </label>
                                 </div>
+
 
                                 <div className="flex items-center ">
                                     <input id="list-radio-license2" type="radio" value="sellar" name="list-radio" className="w-4  text-blue-600 bg-blue-100 border-blue-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-blue-700 dark:focus:ring-offset-blue-700 focus:ring-2 dark:bg-blue-600 dark:border-blue-500" {...register("role", { required: true, maxLength: 20 })} />
@@ -104,6 +162,7 @@ const Regiestration = () => {
 
 
                             </div>
+
                             {/* <button type="submit" >Login</button> */}
                             <input className=" bg-blue-600 rounded-xl text-white py-2 hover:scale-105 duration-300" type="submit" value="Create Account" />
                         </form>
@@ -119,7 +178,7 @@ const Regiestration = () => {
                                 <FaGoogle className="mr-3 text-xl" />
                                 Login with Google
                             </Link>
-                            <Link  onClick={gitHubHandaler} className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-blue-600">
+                            <Link onClick={gitHubHandaler} className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-blue-600">
                                 <FaGithub className="mr-3 text-xl" />
                                 Login with GitHub
                             </Link>

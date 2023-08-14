@@ -62,7 +62,7 @@ const LogIn = () => {
 
             <div className="bg-gray-50 min-h-screen flex items-center justify-center">
 
-                <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
+                <div className="bg-gray-100 flex rounded-2xl w-[70%] mx-auto  shadow-lg  p-5 items-center">
 
                     <div className="md:w-1/2 px-8 md:px-16">
                         <h2 className="font-bold text-2xl text-center text-blue-700">Login</h2>

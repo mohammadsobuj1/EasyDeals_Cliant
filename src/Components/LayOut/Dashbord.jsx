@@ -3,8 +3,8 @@ import { Link, Outlet } from "react-router-dom";
 
 const Dashbord = () => {
 
-    const isAdmin = false
-    const isInstractor = true
+    const isAdmin = true
+    const isInstractor = false
 
 
 
@@ -39,6 +39,7 @@ const Dashbord = () => {
                                     isAdmin ? <>
                                         <li>   <Link to='/dashbord/my'>Profile</Link></li>
                                         <li>   <Link to="/">Blogs</Link></li>
+                                        <li>   <Link to="/dashbord/allusers">All users</Link></li>
                                         <li>   <Link to="/">Easy Donates</Link></li>
                                     </> : "" || isInstractor ? <>
                                         <li>   <Link to="/dashbord/addproduct">add products</Link></li>

@@ -9,6 +9,7 @@ import AddProducts from "../../Pages/DashbordPages/Instractor/AddProducts/AddPro
 import LogIn from "../../Pages/LogIn/LogIn";
 import Regiestration from "../../Pages/Regiestration/Regiestration";
 import PrivetRoute from "../../Components/PrivateRoute/PrivetRoute";
+import AllUsers from "../../Pages/DashbordPages/Admin/AllUsers/AllUsers";
 
 
 
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path: "/dashbord/addproduct",
                 element: <PrivetRoute><AddProducts /></PrivetRoute>
+            },
+            {
+                path: "/dashbord/allusers",
+                element: <AllUsers />
             },
         ]
     },

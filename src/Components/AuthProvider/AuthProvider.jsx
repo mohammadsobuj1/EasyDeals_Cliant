@@ -47,12 +47,12 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider)
     }
 
-    // const changeName = (user, name, file) => {
-    //     return updateProfile(user, {
-    //         displayName: name, photoURL: file
-    //     })
+    const changeName = (user, name, file) => {
+        return updateProfile(user, {
+            displayName: name, photoURL: file
+        })
 
-    // }
+    }
 
 
 
@@ -78,6 +78,7 @@ const AuthProvider = ({ children }) => {
         googlelogIn,
         githublogin,
         logOut,
+        changeName,
     }
 
     return (
